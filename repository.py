@@ -12,3 +12,11 @@ class Repository:
             for pos in ["Keeper", "Verdediger", "Middenvelder", "Aanvaller"]:
                 cursor.execute("INSERT INTO posities(naam) VALUES (?)", (pos,))
         self.verbinding.commit()
+
+    def voeg_speler_toe(self, naam, leeftijd, club, positie_id, waarde):
+        cursor = self.verbinding.cursor()
+        cursor.execute(
+            "INSERT INTO spelers(naam, leeftijd, club, positie_id, waarde) VALUES (?, ?, ?, ?, ?)",
+            (naam, leeftijd, club, positie_id, waarde)
+        )
+        self.verbinding.commit()
