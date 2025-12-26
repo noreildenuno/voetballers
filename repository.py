@@ -35,3 +35,9 @@ class Repository:
         cursor.execute("SELECT * FROM spelers WHERE naam LIKE ?", (f"%{zoekterm}%",))
         rijen = cursor.fetchall()
         return [Speler(*rij) for rij in rijen]
+    
+    def krijg_posities(self):
+        cursor = self.verbinding.cursor()
+        cursor.execute("SELECT * FROM posities")
+        rijen = cursor.fetchall()
+        return [Positie(*rij) for rij in rijen]
