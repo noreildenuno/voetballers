@@ -20,3 +20,12 @@ class Repository:
             (naam, leeftijd, club, positie_id, waarde)
         )
         self.verbinding.commit()
+
+    def krijg_alle_spelers(self):
+        cursor = self.verbinding.cursor()
+        cursor.execute("""
+            SELECT id, naam, leeftijd, club, positie_id, waarde
+            FROM spelers
+        """)
+        rijen = cursor.fetchall()
+        return [Speler(*rij) for rij in rijen]
