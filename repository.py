@@ -1,0 +1,14 @@
+import sqlite3
+from models import Speler, Positie
+
+class Repository:
+    def __init__(self, db_verbinding):
+        self.verbinding = db_verbinding
+
+    def init_standaard_posities(self):
+        cursor = self.verbinding.cursor()
+        cursor.execute("SELECT COUNT(*) FROM posities")
+        if cursor.fetchone()[0] == 0:
+            for pos in ["Keeper", "Verdediger", "Middenvelder", "Aanvaller"]:
+                cursor.execute("INSERT INTO posities(naam) VALUES (?)", (pos,))
+        self.verbinding.commit()
