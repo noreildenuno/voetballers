@@ -30,5 +30,21 @@ class GebruikersInterface:
                 break
             else:
                 print("Ongeldige keuze!")
+                
+    def voeg_speler_ui(self):
+        naam = input("Naam: ")
+        leeftijd = int(input("Leeftijd: "))
+        club = input("Club: ")
+        positie_id = int(input("Positie ID (1=Keeper, 2=Verdediger, 3=Middenvelder, 4=Aanvaller): "))
+        waarde = int(input("Waarde (€): "))
+        self.repo.voeg_speler_toe(naam, leeftijd, club, positie_id, waarde)
+        print("Speler toegevoegd!")
+
+    def toon_alle_spelers_ui(self):
+        spelers = self.repo.krijg_alle_spelers()
+        if not spelers:
+            print("Geen spelers gevonden.")
+        for s in spelers:
+            print(s)
 
 
